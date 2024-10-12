@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #shippingDetails, #paymentMethodSection {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #orderSummary {
+            display: flex;
+            justify-content: space-between;
+        }
+        #orderDetails {
+            margin-bottom: 20px;
+        }
+        .order-list {
+            max-width: 400px;
+        }
+        .order-summary {
+            flex: 1;
+            margin-left: 20px;
+        }
+        button {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049; /* Verde más oscuro */
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div id="shippingDetails">
+        <h2>Datos de Envío</h2>
+        <form id="shippingForm">
+            <label for="fullName">Nombre completo:</label>
+            <input type="text" id="fullName" placeholder="Ej. Juan Pérez" required>
+
+            <label for="city">Ciudad de entrega:</label>
+            <input type="text" id="city" placeholder="Ej. Bogotá" required>
+
+            <label for="department">Departamento:</label>
+            <input type="text" id="department" placeholder="Ej. Cundinamarca" required>
+
+            <label for="address">Dirección completa:</label>
+            <input type="text" id="address" placeholder="Ej. Calle 123 #45-67" required>
+
+            <label for="contactNumber">Número de contacto:</label>
+            <input type="tel" id="contactNumber" placeholder="Ej. 3001234567" required>
+
+            <label for="documentNumber">Número de documento:</label>
+            <input type="text" id="documentNumber" placeholder="Ej. 123456789" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" placeholder="Ej. correo@ejemplo.com" required>
+        </form>
+    </div>
+
+    <div id="paymentMethodSection">
+        <h2>Método de Pago</h2>
+        <select id="paymentMethod" required>
+            <option value="" disabled selected>Seleccione un método de pago</option>
+            <option value="creditCard">Tarjeta de crédito</option>
+            <option value="paypal">PayPal</option>
+            <option value="bankTransfer">Transferencia bancaria</option>
+        </select>
+
+        <div id="creditCardDetails" style="display:none;">
+            <label for="cardNumber">Número de tarjeta:</label>
+            <input type="text" id="cardNumber" placeholder="Ej. 4111 1111 1111 1111" required>
+
+            <label for="expiryDate">Fecha de vencimiento:</label>
+            <input type="text" id="expiryDate" placeholder="MM/AA" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="Ej. 123" required>
+        </div>
+
+        <div id="paypalDetails" style="display:none;">
+            <label for="paypalEmail">Correo electrónico de PayPal:</label>
+            <input type="email" id="paypalEmail" placeholder="Ej. correo@ejemplo.com" required>
+            <p>Serás redirigido a PayPal para completar el pago.</p>
+        </div>
+
+        <div id="bankTransferDetails" style="display:none;">
+            <label for="bankSelect">Seleccione su banco:</label>
+            <select id="bankSelect" required>
+                <option value="" disabled selected>Seleccione un banco</option>
+                <option value="banco1">Banco de Bogotá</option>
+                <option value="banco2">Bancolombia</option>
+                <option value="banco3">Davivienda</option>
+                <option value="banco4">BBVA</option>
+                <option value="banco5">Citibank</option>
+                <option value="banco6">Colpatria</option>
+                <option value="banco7">Banco Popular</option>
+                <option value="banco8">Banco Agrario</option>
+            </select>
+            <p>Realiza la transferencia a la cuenta proporcionada por el vendedor.</p>
+        </div>
+    </div>
+
+    <h2>Resumen de Pedido</h2>
+    <div id="orderSummary">
+        <ul class="order-list" id="orderDetails"></ul>
+        <div class="order-summary">
+            <p>Total: <span id="totalAmount"></span></p>
+        </div>
+    </div>
+
+    <button id="confirmOrder">Confirmar Pedido</button>
+    
+    <script src="checkout.js"></script>
+</body>
+</html>
