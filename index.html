@@ -3,431 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VariedadesExpress</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-
-
-<style>
-    /* Estilo para el contenedor del temporizador */
-    .countdown-container {
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        padding: 20px;
-        margin: 20px auto; /* Centrado horizontal */
-        text-align: center;
-        border-radius: 10px;
-        width: 80%; /* Ancho reducido */
-        max-width: 600px; /* Ancho máximo */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto 3D */
-    }
-    .countdown {
-        font-size: 3em; /* Aumenta el tamaño de la fuente */
-        color: #ff0800; /* Color rojo para destacar */
-        font-weight: 600; /* Hacer la fuente un poco más gruesa */
-        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
-        margin: 10px 0; /* Espaciado arriba y abajo */
-    }
-    .promo-message {
-        margin-top: 10px;
-        font-size: 1.2em;
-        color: #333;
-    }
-    /* Colores y efectos para partes importantes del mensaje */
-    .important {
-        color: #ff0800; /* Color rojo para resaltar */
-        font-weight: bold; /* Negrita para mayor énfasis */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
-    }
-    .highlight {
-        color: #28a745; /* Color verde para destacar otra parte */
-        font-weight: bold; /* Negrita para mayor énfasis */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
-    }
-</style>
-
-
-<body>
-    <header>
-        <div class="navbar">
-            <h1>VariedadesExpress</h1>
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒<span id="cart-notification" class="notification">0</span>
-            </div>
-        </div>
-    </header>
-
-
+    <title>Carrito de Compras</title>
 </head>
 <body>
-   
-    <div class="countdown-container">
-        <div class="countdown" id="countdown"></div>
-        <div class="promo-message">
-            <span class="important">¡Aprovecha nuestras ofertas exclusivas!</span> Esta promoción es por <span class="important">tiempo limitado</span>, así que actúa <span class="highlight">rápido</span> antes de que sea demasiado tarde.
+
+<header>
+    <div class="navbar">
+        <h1>Tienda Online</h1>
+        <div class="cart-icon">
+            🛒 <span class="notification">0</span>
         </div>
     </div>
+</header>
 
-    <main>
-        <div class="product-grid">
-            <!-- Producto 1 -->
-            <div class="product-card">
-                <img src="img/1.png" alt="Producto 1">
-                <h3>Producto 1</h3>
-                <p class="price">$50,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Rojo, Azul, Verde
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M, L, XL
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Material resistente al agua, garantía de 2 años
-                    </div>
-                </div>
+<main>
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="producto1.jpg" alt="Producto 1">
+            <h3>Producto 1</h3>
+            <p class="description">Descripción detallada del Producto 1.</p>
+            <p class="price">$120.000</p>
+            <button onclick="addItemToCart('Producto 1', 120000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto1-details')">Ver detalles</button>
+            <div class="product-details" id="producto1-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 1.</p>
             </div>
-
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <img src="img/2.png" alt="Producto 2">
-                <h3>Producto 2</h3>
-                <p class="price">$70,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Negro, Blanco
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> M, L, XL
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> Agotado
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, PayPal
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Alta durabilidad, tejido transpirable
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="product-card">
-                <img src="img/3.png" alt="Producto 3">
-                <h3>Producto 3</h3>
-                <p class="price">$90,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Verde, Amarillo
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M, XL
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Lavable a máquina, material ligero
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="product-card">
-                <img src="img/4.png" alt="Producto 4">
-                <h3>Producto 4</h3>
-                <p class="price">$120,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Azul, Gris
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> M, L, XL
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Resistente al agua, tecnología de secado rápido
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 5 -->
-            <div class="product-card">
-                <img src="img/5.png" alt="Producto 5">
-                <h3>Producto 5</h3>
-                <p class="price">$150,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Multicolor
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Material elástico, comodidad máxima
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 6 -->
-            <div class="product-card">
-                <img src="img/6.png" alt="Producto 6">
-                <h3>Producto 6</h3>
-                <p class="price">$60,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Blanco, Negro
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Diseño elegante, ideal para ocasiones formales
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 7 -->
-            <div class="product-card">
-                <img src="img/7.png" alt="Producto 7">
-                <h3>Producto 7</h3>
-                <p class="price">$80,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Rojo, Negro
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> Agotado
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Diseño moderno, ajuste perfecto
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 8 -->
-            <div class="product-card">
-                <img src="img/8.png" alt="Producto 8">
-                <h3>Producto 8</h3>
-                <p class="price">$45,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Azul
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Ligero, ideal para el verano
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 9 -->
-            <div class="product-card">
-                <img src="img/4.png" alt="Producto 9">
-                <h3>Producto 9</h3>
-                <p class="price">$95,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Negro
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> L, XL
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Material suave, excelente para el día a día
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 10 -->
-            <div class="product-card">
-                <img src="img/3.png" alt="Producto 10">
-                <h3>Producto 10</h3>
-                <p class="price">$110,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Verde
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, PayPal
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Ideal para deportes al aire libre
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 11 -->
-            <div class="product-card">
-                <img src="img/2.png" alt="Producto 11">
-                <h3>Producto 11</h3>
-                <p class="price">$75,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Naranja
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> S, M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> Agotado
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> PayPal, Transferencia bancaria
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Estilo casual, perfecto para el uso diario
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 12 -->
-            <div class="product-card">
-                <img src="img/1.png" alt="Producto 12">
-                <h3>Producto 12</h3>
-                <p class="price">$65,000</p>
-                <button class="add-to-cart">Agregar al carrito</button>
-                <button class="details-btn">Ver detalles</button>
-                <div class="details">
-                    <div class="details-content">
-                        <span class="details-title">Color:</span> Gris
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Tallas:</span> M, L
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Disponibilidad:</span> En stock
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Método de pago:</span> Tarjeta de crédito
-                    </div>
-                    <div class="details-content">
-                        <span class="details-title">Características:</span> Comodidad y estilo, ideal para ocasiones casuales
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
+        <div class="product-card">
+            <img src="producto2.jpg" alt="Producto 2">
+            <h3>Producto 2</h3>
+            <p class="description">Descripción detallada del Producto 2.</p>
+            <p class="price">$150.000</p>
+            <button onclick="addItemToCart('Producto 2', 150000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto2-details')">Ver detalles</button>
+            <div class="product-details" id="producto2-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 2.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto3.jpg" alt="Producto 3">
+            <h3>Producto 3</h3>
+            <p class="description">Descripción detallada del Producto 3.</p>
+            <p class="price">$100.000</p>
+            <button onclick="addItemToCart('Producto 3', 100000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto3-details')">Ver detalles</button>
+            <div class="product-details" id="producto3-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 3.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto4.jpg" alt="Producto 4">
+            <h3>Producto 4</h3>
+            <p class="description">Descripción detallada del Producto 4.</p>
+            <p class="price">$200.000</p>
+            <button onclick="addItemToCart('Producto 4', 200000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto4-details')">Ver detalles</button>
+            <div class="product-details" id="producto4-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 4.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto5.jpg" alt="Producto 5">
+            <h3>Producto 5</h3>
+            <p class="description">Descripción detallada del Producto 5.</p>
+            <p class="price">$250.000</p>
+            <button onclick="addItemToCart('Producto 5', 250000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto5-details')">Ver detalles</button>
+            <div class="product-details" id="producto5-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 5.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto6.jpg" alt="Producto 6">
+            <h3>Producto 6</h3>
+            <p class="description">Descripción detallada del Producto 6.</p>
+            <p class="price">$300.000</p>
+            <button onclick="addItemToCart('Producto 6', 300000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto6-details')">Ver detalles</button>
+            <div class="product-details" id="producto6-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 6.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto7.jpg" alt="Producto 7">
+            <h3>Producto 7</h3>
+            <p class="description">Descripción detallada del Producto 7.</p>
+            <p class="price">$350.000</p>
+            <button onclick="addItemToCart('Producto 7', 350000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto7-details')">Ver detalles</button>
+            <div class="product-details" id="producto7-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 7.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto8.jpg" alt="Producto 8">
+            <h3>Producto 8</h3>
+            <p class="description">Descripción detallada del Producto 8.</p>
+            <p class="price">$400.000</p>
+            <button onclick="addItemToCart('Producto 8', 400000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto8-details')">Ver detalles</button>
+            <div class="product-details" id="producto8-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 8.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto9.jpg" alt="Producto 9">
+            <h3>Producto 9</h3>
+            <p class="description">Descripción detallada del Producto 9.</p>
+            <p class="price">$450.000</p>
+            <button onclick="addItemToCart('Producto 9', 450000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto9-details')">Ver detalles</button>
+            <div class="product-details" id="producto9-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 9.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto10.jpg" alt="Producto 10">
+            <h3>Producto 10</h3>
+            <p class="description">Descripción detallada del Producto 10.</p>
+            <p class="price">$500.000</p>
+            <button onclick="addItemToCart('Producto 10', 500000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto10-details')">Ver detalles</button>
+            <div class="product-details" id="producto10-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 10.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto11.jpg" alt="Producto 11">
+            <h3>Producto 11</h3>
+            <p class="description">Descripción detallada del Producto 11.</p>
+            <p class="price">$550.000</p>
+            <button onclick="addItemToCart('Producto 11', 550000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto11-details')">Ver detalles</button>
+            <div class="product-details" id="producto11-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 11.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="producto12.jpg" alt="Producto 12">
+            <h3>Producto 12</h3>
+            <p class="description">Descripción detallada del Producto 12.</p>
+            <p class="price">$600.000</p>
+            <button onclick="addItemToCart('Producto 12', 600000)">Añadir al carrito</button>
+            <button onclick="showDetails('producto12-details')">Ver detalles</button>
+            <div class="product-details" id="producto12-details" style="display: none;">
+                <p class="detail-title">Descripción:</p>
+                <p>Descripción del Producto 12.</p>
+            </div>
+        </div>
+    </div>
+</main>
 
-    <footer>
-        <p>&copy; 2024 Tienda 3D. Todos los derechos reservados.</p>
-    </footer>
 
-    <script src="script.js"></script>
+<div class="cart" id="cart">
+    <h2>Carrito</h2>
+    <ul id="cart-items"></ul>
+    <div id="cart-total">Total: $0</div>
+    <button id="proceed-button" style="display: none;">Proceder al pago</button>
 
-    <script>
-        // Obtener el tiempo de finalización del temporizador desde el almacenamiento local
-        let targetTime = localStorage.getItem('targetTime');
 
-        if (!targetTime) {
-            // Si no existe, establecer el tiempo de finalización a 2 horas desde ahora
-            targetTime = Date.now() + 2 * 60 * 60 * 1000; // 2 horas
-            localStorage.setItem('targetTime', targetTime);
-        } else {
-            // Si existe, convertirlo a número
-            targetTime = Number(targetTime);
-        }
+</div>
 
-        const countdownElement = document.getElementById("countdown");
 
-        function updateCountdown() {
-            const now = Date.now();
-            const timeRemaining = targetTime - now;
+<!-- Modal para mostrar detalles del producto -->
+<div class="modal" id="product-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+    </div>
+</div>
 
-            if (timeRemaining <= 0) {
-                countdownElement.textContent = "¡La oferta ha terminado!";
-                clearInterval(timer);
-                localStorage.removeItem('targetTime'); // Limpiar el tiempo de almacenamiento local
-                return;
-            }
+<script src="script.js"></script>
 
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-            countdownElement.textContent = `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-        }
 
-        const timer = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Inicializa el temporizador al cargar la página
-    </script>
+<script>
+    const cart = [];
+
+    function addItemToCart(name, price) {
+        cart.push({ name, price });
+        localStorage.setItem('orderDetails', JSON.stringify(cart));
+        alert(`${name} añadido al carrito.`);
+    }
+
+    function proceedToCheckout() {
+        // Redirigir a la página de checkout
+        window.location.href = 'checkout.html'; // Asegúrate de que la ruta sea correcta
+    }
+</script>
+
 </body>
 </html>
-
-
