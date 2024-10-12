@@ -19,6 +19,7 @@
         #left-section, #right-section {
             width: 48%;
             padding: 20px;
+            box-sizing: border-box; /* Asegura que el padding no sume al ancho */
         }
 
         #right-section {
@@ -37,8 +38,10 @@
 
         form input, form select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Bordes redondeados para inputs */
         }
 
         button {
@@ -47,10 +50,12 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px; /* Bordes redondeados para botones */
+            width: 100%; /* Botón ocupa el ancho completo */
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #909192;
         }
 
         #order-summary {
@@ -98,11 +103,37 @@
             font-size: 16px;
             padding: 0;
             margin: 0 5px;
+            background-color: #007bff; /* Color de fondo para botones de cantidad */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            border-radius: 4px; /* Bordes redondeados */
+            cursor: pointer;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #0056b3; /* Color al pasar el cursor */
         }
 
         .quantity-display {
             margin: 0 10px;
             font-weight: bold;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+            }
+
+            #left-section, #right-section {
+                width: 100%; /* Ocupa el 100% del ancho en móviles */
+                padding: 10px; /* Menos padding en móviles */
+            }
+
+            #right-section {
+                border-left: none; /* Elimina el borde en móviles */
+                border-top: 2px solid #ccc; /* Añadir un borde superior */
+            }
         }
     </style>
 </head>
@@ -194,34 +225,35 @@
     </div>
 
     <script>
-        // Código para mostrar el resumen del pedido
+        // Código para manejar el resumen del pedido
         document.addEventListener('DOMContentLoaded', () => {
-            const orderSummary = document.getElementById('order-summary');
-            const orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
+            let orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
 
-            // Función para actualizar el resumen del pedido
             const updateOrderSummary = () => {
-                orderSummary.innerHTML = `
-                    <h2>Detalles del Pedido</h2>
-                    <ul>
-                        ${orderDetails.map((item, index) => `
-                            <li class="product-item">
-                                <p><strong>Nombre:</strong> ${item.name}</p>
-                                <p><strong>Talla:</strong> ${item.size}</p>
-                                <p><strong>Color:</strong> ${item.color}</p>
-                                <div class="quantity-controls">
-                                    <button onclick="changeQuantity(${index}, -1)">-</button>
-                                    <span class="quantity-display">${item.quantity}</span>
-                                    <button onclick="changeQuantity(${index}, 1)">+</button>
-                                </div>
-                                <p><strong>Precio:</strong> $${item.price}</p>
-                                <p><strong>Total:</strong> $${item.price * item.quantity}</p>
-                                <button class="delete-button" onclick="removeItem(${index})">🗑️</button>
-                            </li>
-                        `).join('')}
-                    </ul>
-                    <p><strong>Total a Pagar:</strong> $${orderDetails.reduce((total, item) => total + (item.price * item.quantity), 0)}</p>
-                `;
+                const orderSummary = document.getElementById('order-summary');
+                orderSummary.innerHTML = ''; // Limpiar el resumen anterior
+                orderDetails.forEach((item, index) => {
+                    orderSummary.innerHTML += `
+                        <div class="product-item">
+                            <h3>${item.name}</h3>
+                            <p>Talla: ${item.size}</p>
+                            <p>Color: ${item.color}</p>
+                            <p class="quantity-controls">
+                                <button onclick="changeQuantity(${index}, -1)">-</button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button onclick="changeQuantity(${index}, 1)">+</button>
+                            </p>
+                            <p>Total: $${(item.price * item.quantity).toFixed(2)}</p>
+                            <button class="delete-button" onclick="removeItem(${index})">
+                                <img src="img/icon.png" alt="Eliminar" style="width: 20px; height: 20px;"> <!-- Cambia a la ruta de tu icono -->
+                            </button>
+                        </div>
+                    `;
+                });
+
+                // Mostrar el total a pagar
+                const totalAmount = orderDetails.reduce((total, item) => total + (item.price * item.quantity), 0);
+                orderSummary.innerHTML += `<h2>Total a Pagar: $${totalAmount.toFixed(2)}</h2>`;
             };
 
             // Función para eliminar un producto
