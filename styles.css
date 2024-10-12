@@ -71,13 +71,10 @@ main {
   border-radius: 10px;
 }
 
-h3, .price {
-  text-align: center;
-}
-
 .price {
   font-weight: bold;
   color: #4caf50;
+  text-align: center;
 }
 
 button {
@@ -114,7 +111,7 @@ footer {
 
 .details-title {
   font-weight: bold;
-  color: #ff00a8; /* Color de los títulos */
+  color: #ff00a8; /* Cambia este color si deseas */
 }
 
 .details-content {
@@ -125,99 +122,168 @@ footer {
 .cart {
   display: none;
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 50px; /* Separación del borde superior */
+  right: 20px; /* Separación del borde derecho */
   width: 300px;
-  height: auto;
+  height: auto; /* Ajustar a contenido */
+  max-height: 80%; /* Limitar la altura máxima */
   background-color: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
   z-index: 1000;
-  overflow-y: auto;
-  max-height: 80%;
-  border-radius: 10px 0 0 10px;
+  overflow-y: auto; /* Permitir desplazamiento si el contenido es mayor que la altura */
 }
 
-.cart-open {
-  display: block;
-}
-
-.cart-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#cart-items {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-  text-align: center;
-}
-
-#cart-items li {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* Estilo para los elementos del carrito */
 .cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  display: flex; /* Usar flexbox para alinear elementos en una fila */
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: center; /* Centrar verticalmente */
+  margin-bottom: 10px; /* Espacio entre elementos del carrito */
 }
 
-.cart-item span {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.cart-item .quantity {
-  display: flex;
-  align-items: center;
-}
-
-.cart-item .quantity button {
-  width: 30px;
-  margin: 0 5px;
-}
-
-.cart-item .remove-item {
-  cursor: pointer;
-  color: red;
-}
-
-#cart-total {
+/* Estilo para el total */
+.cart-total {
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px; /* Espacio superior */
 }
 
-.close-cart-btn {
+/* Estilo para los botones */
+.quantity-button {
   background-color: #ff00a8;
   color: white;
   border: none;
-  padding: 10px;
-  width: 100%;
-  cursor: pointer;
+  padding: 2px 5px; /* Tamaño más pequeño */
   border-radius: 5px;
-  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.8em; /* Tamaño de texto más pequeño */
+}
+
+.quantity-button:hover {
+  background-color: #ff0072;
+}
+
+/* Estilo para la visualización de cantidad */
+.quantity-container {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+}
+
+.quantity-display {
+  margin: 0 5px; /* Espacio entre botones y cantidad */
+  font-size: 0.9em; /* Tamaño de texto para mostrar la cantidad */
+}
+
+/* Estilo para el ícono de papelera */
+.delete-icon {
+  cursor: pointer;
+  margin-left: 10px;
+  color: red;
+  font-size: 1.2em; /* Ajustar tamaño según sea necesario */
+}
+
+/* Estilo para la notificación */
+.notification {
+  background-color: #ffeb3b; /* Color de fondo amarillo */
+  color: #333; /* Color de texto oscuro */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 15px; /* Espacio debajo */
+  display: none; /* Inicialmente oculto */
+  font-weight: bold;
+}
+
+/* Estilo para el botón "Proceder al Pago" */
+#proceed-button {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer;
+  font-size: 1em; /* Tamaño de texto */
+  width: 100%; /* Ancho completo */
+  margin-top: 15px; /* Espacio superior */
   transition: background-color 0.3s;
 }
 
-.close-cart-btn:hover {
-  background-color: #ff0072;
+#proceed-button:hover {
+  background-color: #45a049; /* Color más oscuro al pasar el ratón */
 }
 
 @media (max-width: 600px) {
   .product-grid {
-      grid-template-columns: 1fr;
-  }
-
-  .cart {
-      width: 100%;
-      max-height: 50%;
+    grid-template-columns: 1fr;
   }
 }
+
+
+
+
+
+.product-details {
+  margin-top: 10px; /* Espacio superior */
+  background-color: #f9f9f9; /* Color de fondo ligero */
+  padding: 10px; /* Espacio interno */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.detail-title {
+  font-weight: bold; /* Negrita */
+  color: #ff00a8; /* Color que resalta */
+  margin-bottom: 5px; /* Espacio inferior */
+}
+
+
+
+
+
+
+
+
+
+
+/* Código anterior... */
+
+.modal {
+  display: none; /* Ocultar el modal por defecto */
+  position: fixed;
+  z-index: 1001; /* Asegúrate de que el modal esté por encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Tomar toda la pantalla */
+  height: 100%; /* Tomar toda la pantalla */
+  overflow: auto; /* Permitir desplazamiento si es necesario */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto; /* 15% desde la parte superior y centrado */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Ancho del modal */
+  max-width: 500px; /* Ancho máximo */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Código CSS adicional ... */
+
+
+
