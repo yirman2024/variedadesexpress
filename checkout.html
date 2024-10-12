@@ -1,93 +1,263 @@
+<!-- checkout.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link rel="stylesheet" href="checkout.css">
- 
+    <link rel="stylesheet" href="checkout.css"> <!-- Ajusta el nombre de tu CSS -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #left-section, #right-section {
+            width: 48%;
+            padding: 20px;
+        }
+
+        #right-section {
+            background-color: #f9f9f9;
+            border-left: 2px solid #ccc;
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #order-summary {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .product-item {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            position: relative; /* Añadido para el posicionamiento del botón */
+        }
+
+        .delete-button {
+            background-color: transparent; /* Fondo transparente */
+            border: none; /* Sin borde */
+            color: #dc3545; /* Color del icono de basura */
+            cursor: pointer;
+            position: absolute; /* Posicionamiento absoluto */
+            right: 0; /* Alinear a la derecha */
+            top: 0; /* Alinear a la parte superior */
+            padding: 0; /* Sin padding para ajustarse al tamaño del icono */
+            width: 30px; /* Ajustar el ancho del botón al del icono */
+            height: 30px; /* Ajustar la altura del botón al del icono */
+            display: flex; /* Usar flex para centrar el icono */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+        }
+
+        .delete-button:hover {
+            color: #c82333; /* Color del icono al pasar el cursor */
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            padding: 0;
+            margin: 0 5px;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Checkout</h1>
-    <div id="shippingDetails">
-        <h2>Datos de Envío</h2>
-        <form id="shippingForm">
-            <label for="fullName">Nombre completo:</label>
-            <input type="text" id="fullName" placeholder="Ej. Juan Pérez" required>
-
-            <label for="city">Ciudad de entrega:</label>
-            <input type="text" id="city" placeholder="Ej. Bogotá" required>
-
+    <!-- Sección izquierda (Formulario de pago y envío) -->
+    <div id="left-section">
+        <h1>Datos de Envío</h1>
+        <form id="shipping-form">
+            <label for="full-name">Nombre Completo:</label>
+            <input type="text" id="full-name" placeholder="Ejemplo: Juan Pérez" required>
+            
+            <label for="city">Ciudad de Entrega:</label>
+            <input type="text" id="city" placeholder="Ejemplo: Bogotá" required>
+            
             <label for="department">Departamento:</label>
-            <input type="text" id="department" placeholder="Ej. Cundinamarca" required>
+            <input type="text" id="department" placeholder="Ejemplo: Cundinamarca" required>
+            
+            <label for="address">Dirección Completa:</label>
+            <input type="text" id="address" placeholder="Ejemplo: Calle 123 #45-67" required>
+            
+            <label for="contact-number">Número de Contacto:</label>
+            <input type="tel" id="contact-number" placeholder="Ejemplo: 3001234567" required>
+            
+            <label for="neighborhood">Barrio:</label>
+            <input type="text" id="neighborhood" placeholder="Ejemplo: Chapinero" required>
+            
+            <label for="reference">Datos de Referencia (opcional):</label>
+            <input type="text" id="reference" placeholder="Ejemplo: Frente a la tienda de abarrotes">
+            
+            <label for="postal-code">Código Postal:</label>
+            <input type="text" id="postal-code" placeholder="Ejemplo: 111111" required>
 
-            <label for="address">Dirección completa:</label>
-            <input type="text" id="address" placeholder="Ej. Calle 123 #45-67" required>
+            <h2>Seleccione el Método de Pago</h2>
+            <select id="payment-method" onchange="togglePaymentFields()">
+                <option value="">-- Seleccionar Método --</option>
+                <option value="card">Tarjeta de Crédito</option>
+                <option value="transfer">Transferencia Bancaria</option>
+            </select>
 
-            <label for="contactNumber">Número de contacto:</label>
-            <input type="tel" id="contactNumber" placeholder="Ej. 3001234567" required>
+            <div id="payment-methods">
+                <div id="credit-card-fields">
+                    <label for="card-name">Nombre en la Tarjeta:</label>
+                    <input type="text" id="card-name" placeholder="Ejemplo: Juan Pérez" required>
+                    
+                    <label for="card-number">Número de la Tarjeta:</label>
+                    <input type="text" id="card-number" placeholder="Ejemplo: 1234 5678 9012 3456" required>
+                    
+                    <label for="expiration-date">Fecha de Expiración:</label>
+                    <input type="text" id="expiration-date" placeholder="Ejemplo: MM/AA" required>
+                    
+                    <label for="cvv">Código CVV:</label>
+                    <input type="text" id="cvv" placeholder="Ejemplo: 123" required>
+                </div>
 
-            <label for="documentNumber">Número de documento:</label>
-            <input type="text" id="documentNumber" placeholder="Ej. 123456789" required>
+                <div id="bank-transfer-fields" style="display: none;">
+                    <label for="bank-name">Nombre del Banco:</label>
+                    <select id="bank-name" required>
+                        <option value="">-- Selecciona un Banco --</option>
+                        <option value="bancolombia">Bancolombia</option>
+                        <option value="davivienda">Davivienda</option>
+                        <option value="bbva">BBVA</option>
+                        <option value="grupoaval">Grupo Aval</option>
+                        <option value="nequi">Nequi</option>
+                        <option value="daviPlata">DaviPlata</option>
+                        <option value="citibank">Citibank</option>
+                        <option value="santander">Santander</option>
+                        <option value="pichincha">Banco Pichincha</option>
+                        <option value="occidente">Banco de Occidente</option>
+                    </select>
+                    
+                    <label for="account-number">Número de Cuenta:</label>
+                    <input type="text" id="account-number" placeholder="Ejemplo: 123456789" required>
+                    
+                    <label for="transfer-reference">Referencia de la Transferencia:</label>
+                    <input type="text" id="transfer-reference" placeholder="Ejemplo: 987654" required>
+                </div>
+            </div>
 
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" placeholder="Ej. correo@ejemplo.com" required>
+            <button type="submit">Confirmar Pedido</button>
         </form>
     </div>
 
-    <div id="paymentMethodSection">
-        <h2>Método de Pago</h2>
-        <select id="paymentMethod" required>
-            <option value="" disabled selected>Seleccione un método de pago</option>
-            <option value="creditCard">Tarjeta de crédito</option>
-            <option value="paypal">PayPal</option>
-            <option value="bankTransfer">Transferencia bancaria</option>
-        </select>
-
-        <div id="creditCardDetails" style="display:none;">
-            <label for="cardNumber">Número de tarjeta:</label>
-            <input type="text" id="cardNumber" placeholder="Ej. 4111 1111 1111 1111" required>
-
-            <label for="expiryDate">Fecha de vencimiento:</label>
-            <input type="text" id="expiryDate" placeholder="MM/AA" required>
-
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" placeholder="Ej. 123" required>
-        </div>
-
-        <div id="paypalDetails" style="display:none;">
-            <label for="paypalEmail">Correo electrónico de PayPal:</label>
-            <input type="email" id="paypalEmail" placeholder="Ej. correo@ejemplo.com" required>
-            <p>Serás redirigido a PayPal para completar el pago.</p>
-        </div>
-
-        <div id="bankTransferDetails" style="display:none;">
-            <label for="bankSelect">Seleccione su banco:</label>
-            <select id="bankSelect" required>
-                <option value="" disabled selected>Seleccione un banco</option>
-                <option value="banco1">Banco de Bogotá</option>
-                <option value="banco2">Bancolombia</option>
-                <option value="banco3">Davivienda</option>
-                <option value="banco4">BBVA</option>
-                <option value="banco5">Citibank</option>
-                <option value="banco6">Colpatria</option>
-                <option value="banco7">Banco Popular</option>
-                <option value="banco8">Banco Agrario</option>
-            </select>
-            <p>Realiza la transferencia a la cuenta proporcionada por el vendedor.</p>
+    <!-- Sección derecha (Resumen del pedido) -->
+    <div id="right-section">
+        <h1>Resumen del Pedido</h1>
+        <div id="order-summary">
+            <!-- Aquí se mostrará el resumen del pedido -->
         </div>
     </div>
 
-    <h2>Resumen de Pedido</h2>
-    <div id="orderSummary">
-        <ul class="order-list" id="orderDetails"></ul>
-        <div class="order-summary">
-            <p>Total: <span id="totalAmount"></span></p>
-        </div>
-    </div>
+    <script>
+        // Código para mostrar el resumen del pedido
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderSummary = document.getElementById('order-summary');
+            const orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
 
-    <button id="confirmOrder">Confirmar Pedido</button>
-    
-    <script src="checkout.js"></script>
+            // Función para actualizar el resumen del pedido
+            const updateOrderSummary = () => {
+                orderSummary.innerHTML = `
+                    <h2>Detalles del Pedido</h2>
+                    <ul>
+                        ${orderDetails.map((item, index) => `
+                            <li class="product-item">
+                                <p><strong>Nombre:</strong> ${item.name}</p>
+                                <p><strong>Talla:</strong> ${item.size}</p>
+                                <p><strong>Color:</strong> ${item.color}</p>
+                                <div class="quantity-controls">
+                                    <button onclick="changeQuantity(${index}, -1)">-</button>
+                                    <span class="quantity-display">${item.quantity}</span>
+                                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                                </div>
+                                <p><strong>Precio:</strong> $${item.price}</p>
+                                <p><strong>Total:</strong> $${item.price * item.quantity}</p>
+                                <button class="delete-button" onclick="removeItem(${index})">🗑️</button>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <p><strong>Total a Pagar:</strong> $${orderDetails.reduce((total, item) => total + (item.price * item.quantity), 0)}</p>
+                `;
+            };
+
+            // Función para eliminar un producto
+            window.removeItem = (index) => {
+                orderDetails.splice(index, 1); // Eliminar el producto de la lista
+                localStorage.setItem('orderDetails', JSON.stringify(orderDetails)); // Actualizar localStorage
+                updateOrderSummary(); // Actualizar el resumen del pedido
+            };
+
+            // Función para cambiar la cantidad de productos
+            window.changeQuantity = (index, change) => {
+                if (orderDetails[index].quantity + change > 0) {
+                    orderDetails[index].quantity += change; // Cambiar la cantidad
+                    localStorage.setItem('orderDetails', JSON.stringify(orderDetails)); // Actualizar localStorage
+                    updateOrderSummary(); // Actualizar el resumen del pedido
+                }
+            };
+
+            updateOrderSummary(); // Mostrar el resumen inicial
+        });
+
+        // Función para mostrar/ocultar los campos de pago según el método seleccionado
+        function togglePaymentFields() {
+            const paymentMethod = document.getElementById('payment-method').value;
+            const paymentMethodsSection = document.getElementById('payment-methods');
+            const creditCardFields = document.getElementById('credit-card-fields');
+            const bankTransferFields = document.getElementById('bank-transfer-fields');
+
+            if (paymentMethod) {
+                paymentMethodsSection.style.display = 'block'; // Muestra la sección de métodos de pago
+                creditCardFields.style.display = paymentMethod === 'card' ? 'block' : 'none'; // Muestra u oculta campos de tarjeta
+                bankTransferFields.style.display = paymentMethod === 'transfer' ? 'block' : 'none'; // Muestra u oculta campos de transferencia
+            } else {
+                paymentMethodsSection.style.display = 'none'; // Oculta la sección de métodos de pago
+            }
+        }
+    </script>
 </body>
 </html>
