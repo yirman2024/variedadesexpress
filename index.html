@@ -1,36 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda Online</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online 3D</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Tienda Online</h1>
-    <div class="cart-container">
-      <button class="cart-button" onclick="openCartSummary()">Carrito</button>
-      <span id="cart-count">0</span>
-    </div>
-  </header>
+    <header>
+        <div class="navbar">
+            <h1>Tienda 3D</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒<span id="cart-notification" class="notification">0</span>
+            </div>
+        </div>
+    </header>
 
-  <main>
-    <div class="product-list">
-      <div class="product">
-        <h2>Producto 1</h2>
-        <p>$10.00</p>
-        <button onclick="addToCart('Producto 1', 10.00)">Agregar al carrito</button>
-      </div>
-      <div class="product">
-        <h2>Producto 2</h2>
-        <p>$20.00</p>
-        <button onclick="addToCart('Producto 2', 20.00)">Agregar al carrito</button>
-      </div>
-      <!-- Agrega más productos aquí -->
-    </div>
-  </main>
+    <main>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="Producto 1">
+                <h3>Producto 1</h3>
+                <p class="price">$50,000</p>
+                <button class="add-to-cart">Agregar al carrito</button>
+                <button class="details-btn">Ver detalles</button>
+                <div class="details">
+                    <div class="details-content">
+                        <span class="details-title">Color:</span> Rojo, Azul, Verde
+                    </div>
+                    <div class="details-content">
+                        <span class="details-title">Tallas:</span> S, M, L, XL
+                    </div>
+                    <div class="details-content">
+                        <span class="details-title">Disponibilidad:</span> En stock
+                    </div>
+                    <div class="details-content">
+                        <span class="details-title">Método de pago:</span> Tarjeta de crédito, PayPal, Transferencia bancaria
+                    </div>
+                    <div class="details-content">
+                        <span class="details-title">Características:</span> Material resistente al agua, garantía de 2 años
+                    </div>
+                </div>
+            </div>
+            <!-- Agrega más productos aquí si es necesario -->
+        </div>
+    </main>
 
-  <script src="script.js"></script>
+    <div id="cart" class="cart">
+        <h2>Carrito de compras</h2>
+        <div class="cart-content">
+            <ul id="cart-items"></ul>
+            <p>Total: <span id="cart-total">$0</span></p>
+            <button class="checkout-btn" onclick="openCheckout()">Comprar</button>
+        </div>
+        <button class="close-cart-btn" onclick="toggleCart()">Cerrar</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tienda 3D</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
